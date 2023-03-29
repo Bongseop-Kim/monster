@@ -9,7 +9,8 @@ export class User {
   @Column()
   name: string;
 
-  @Column()
+  //select false를 해주면 해당 값은 return 되지 않는다.
+  @Column({ select: false })
   password: string;
 
   @Column({ unique: true })
@@ -17,6 +18,9 @@ export class User {
 
   @Column()
   gender: string;
+
+  @Column({ default: false })
+  blocked: boolean;
 
   @OneToMany(() => Post, (post) => post.author)
   posts: Post[];

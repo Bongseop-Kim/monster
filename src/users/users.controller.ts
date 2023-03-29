@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
-import { JwtAuthGuard } from 'src/auth/jwt.guard';
+import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
 import { HttpExceptionFilter } from 'src/common/exception/http-exception.filter';
 import { SuccessInterceptor } from 'src/common/interceptor/success.interceptor';
@@ -25,7 +25,7 @@ export class UsersController {
     private readonly authService: AuthService,
   ) {}
 
-  @Post('singUp')
+  @Post('signup')
   async sighUp(@Body() body: UserRequestDto) {
     return await this.usersService.signUp(body);
   }
@@ -35,15 +35,10 @@ export class UsersController {
     return this.authService.jwtLogIn(data);
   }
 
-  @Get()
-  async getAllUsers() {
-    return await this.usersService.findAll();
-  }
-
   //회원정보는 jwt로 받습니다.
   @UseGuards(JwtAuthGuard)
   @Get()
   async getCurrentUser(@CurrentUser() user) {
-    return user.readOnlyData;
+    return user;
   }
 }
