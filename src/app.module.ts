@@ -5,6 +5,7 @@ import { PostsModule } from './posts/posts.module';
 import { User } from './users/user.entity';
 import { Post } from './posts/post.entity';
 import { CommentsModule } from './comments/comments.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,14 +14,16 @@ import { CommentsModule } from './comments/comments.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
-      database: 'test',
+      password: 'secret',
+      database: 'local-db',
       entities: [User, Post],
       synchronize: true,
+      autoLoadEntities: true,
     }),
     UsersModule,
     PostsModule,
     CommentsModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

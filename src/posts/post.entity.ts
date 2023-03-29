@@ -22,7 +22,7 @@ export class Post {
   content: string;
 
   @Column({ nullable: true })
-  files: string[];
+  imgFiles: string;
 
   @Column({ default: 0 })
   viewCount: number;
