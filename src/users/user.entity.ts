@@ -18,9 +18,15 @@ export class User {
   @Column()
   gender: string;
 
-  @Column({ name: 'membership_date' })
-  membershipDate: Date;
-
   @OneToMany(() => Post, (post) => post.author)
   posts: Post[];
+
+  //패스 워드는 필요에 따라 readOnlyData를 만들어 준다.
+  readonly readOnlyData: {
+    id: number;
+    name: string;
+    mobile: string;
+    gender: string;
+    posts: Post[];
+  };
 }
