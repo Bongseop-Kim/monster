@@ -1,6 +1,7 @@
 import { Post } from 'src/posts/post.entity';
 import { PostLikes } from 'src/postLikes/postLikes.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Comment } from 'src/comments/comment.entity';
 
 @Entity()
 export class User {
@@ -31,6 +32,11 @@ export class User {
     nullable: true,
   })
   likes: PostLikes[];
+
+  @OneToMany(() => Comment, (comment) => comment.userWhoComment, {
+    nullable: true,
+  })
+  comments: Comment[];
 
   //패스 워드는 reutrn 안함 readOnlyData를 만들어 준다.
   readonly readOnlyData: {

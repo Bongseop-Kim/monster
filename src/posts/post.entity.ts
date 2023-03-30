@@ -1,3 +1,4 @@
+import { Comment } from 'src/comments/comment.entity';
 import { PostLikes } from 'src/postLikes/postLikes.entity';
 import { User } from 'src/users/user.entity';
 import {
@@ -38,6 +39,11 @@ export class Post {
     nullable: true,
   })
   likes: PostLikes[];
+
+  @OneToMany(() => Comment, (comment) => comment.post, {
+    nullable: true,
+  })
+  commetns: Comment[];
 
   @Column({ default: false })
   blocked: boolean;

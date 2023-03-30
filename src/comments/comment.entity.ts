@@ -1,3 +1,4 @@
+import { Post } from 'src/posts/post.entity';
 import { User } from 'src/users/user.entity';
 import {
   Entity,
@@ -15,7 +16,11 @@ export class Comment {
   @Column()
   content: string;
 
+  @ManyToOne(() => Post, (post) => post.likes)
+  @JoinColumn({ name: 'post_id', referencedColumnName: 'id' })
+  post: Post;
+
   @ManyToOne(() => User, (user) => user.posts)
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   userWhoComment: User;
 }

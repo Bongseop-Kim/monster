@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   Get,
   Param,
   UseFilters,
@@ -18,5 +19,10 @@ export class PostLikesController {
   @Get(':postId/:userId')
   async createPostLikes(@Param('postId') postId, @Param('userId') userId) {
     await this.postLikesService.createPostLikes(postId, userId);
+  }
+
+  @Delete(':postLikesId')
+  async deletePostLikes(@Param('postLikesId') postLikesId) {
+    await this.postLikesService.deletePostLikes(postLikesId);
   }
 }

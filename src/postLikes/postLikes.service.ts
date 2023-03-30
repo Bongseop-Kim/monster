@@ -10,11 +10,11 @@ export class PostLikesService {
   constructor(
     @InjectRepository(PostLikes)
     private readonly postLikeRepository: Repository<PostLikes>,
-    private postRepository: PostRepository,
+    private readonly postRepository: PostRepository,
     private readonly userRepository: UserRepository,
   ) {}
 
-  async createPostLikes(postId: number, userId: number) {
+  async createPostLikes(postId: number, userId: number): Promise<PostLikes> {
     const user = await this.userRepository.findUserByIdWithoutPassword(userId);
     const post = await this.postRepository.findPostById(postId);
     const postLikes = new PostLikes();
