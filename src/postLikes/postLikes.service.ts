@@ -24,4 +24,8 @@ export class PostLikesService {
     const newPostLike = await this.postLikeRepository.save(postLikes);
     return newPostLike;
   }
+
+  async deletePostLikes(postLikesId: number) {
+    await this.postLikeRepository.delete(postLikesId);
+  }
 }
