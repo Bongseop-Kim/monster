@@ -27,27 +27,26 @@ export class PostsController {
     return createdPost;
   }
 
-  //이 때 id는 post의 id 이다.
-  @Get(':id')
-  async getPostById(@Param('id') postId: number) {
+  @Get(':postId')
+  async getPostById(@Param('postId') postId: number) {
     const post = await this.postsService.getPostById(postId);
     // 포스트를 조회하면 자동으로 뷰 카운트가 올라 갈 것으 생각하고 조회 후 카운트를 바로 증가 시킵니다.
     await this.postsService.incrementViewCount(postId);
     return post;
   }
 
-  @Put(':id')
-  async updatePostById(@Param('id') postId: number, data: PostReqDto) {
+  @Put(':postId')
+  async updatePostById(@Param('postId') postId: number, data: PostReqDto) {
     await this.postsService.updatePostById(postId, data);
   }
 
-  @Delete(':id')
-  async deletePostById(@Param('id') postId: number) {
+  @Delete(':postId')
+  async deletePostById(@Param('postId') postId: number) {
     await this.postsService.deletePostById(postId);
   }
 
-  @Patch(':id')
-  async blockPostById(@Param('id') postId: number) {
+  @Patch(':postId')
+  async blockPostById(@Param('postId') postId: number) {
     await this.postsService.blockPostById(postId);
   }
 }
