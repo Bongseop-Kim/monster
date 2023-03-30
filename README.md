@@ -1,7 +1,6 @@
 ![waving](https://capsule-render.vercel.app/api?type=waving&height=250&text=게시판&nbsp;&nbsp;Project&fontAlign=30&fontAlignY=40&color=gradient)
 
-📌 영선산업
-게시판 프로젝트 API
+📌 게시판 프로젝트 API
 
 테이블 명세서 바로가기[https://docs.google.com/spreadsheets/d/15iKuPGbsaVItD3U63BHdkX5PPRg96cKBjIWlcV_kR_0/edit?usp=sharing](https://docs.google.com/spreadsheets/d/15iKuPGbsaVItD3U63BHdkX5PPRg96cKBjIWlcV_kR_0/edit?usp=sharing)
 
