@@ -1,3 +1,4 @@
+import { PostLikes } from 'src/postLikes/postLikes.entity';
 import { User } from 'src/users/user.entity';
 import {
   Entity,
@@ -6,8 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
   CreateDateColumn,
-  ManyToMany,
-  JoinTable,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -34,13 +34,10 @@ export class Post {
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   author: User;
 
-  @ManyToMany(() => User)
-  @JoinTable({
-    name: 'post_likes',
-    joinColumn: { name: 'post_id', referencedColumnName: 'id' },
-    inverseJoinColumn: { name: 'user_id', referencedColumnName: 'id' },
+  @OneToMany(() => PostLikes, (postLikes) => postLikes.post, {
+    nullable: true,
   })
-  likes: User[];
+  likes: PostLikes[];
 
   @Column({ default: false })
   blocked: boolean;

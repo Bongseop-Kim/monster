@@ -45,7 +45,7 @@ export class PostsController {
     await this.postsService.deletePostById(postId);
   }
 
-  @Patch(':postId')
+  @Patch('block/:postId')
   async blockPostById(@Param('postId') postId: number) {
     await this.postsService.blockPostById(postId);
   }

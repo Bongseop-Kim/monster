@@ -1,15 +1,13 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from 'src/users/user.repository';
-import { Repository } from 'typeorm';
 import { PostReqDto } from './dto/post.request.dto';
 import { Post } from './post.entity';
+import { PostRepository } from './post.repository';
 
 @Injectable()
 export class PostsService {
   constructor(
-    @InjectRepository(Post)
-    private postRepository: Repository<Post>,
+    private readonly postRepository: PostRepository,
     private readonly userRepository: UserRepository,
   ) {}
 
@@ -29,11 +27,7 @@ export class PostsService {
   }
 
   async getPostById(id: number): Promise<Post> {
-    const post = await this.postRepository.findOne({
-      where: {
-        id: id,
-      },
-    });
+    const post = await this.postRepository.findPostById(id);
     if (!post) {
       throw new UnauthorizedException('해당 게시물은 없습니다.');
     }
@@ -41,13 +35,12 @@ export class PostsService {
   }
 
   async deletePostById(postId: number) {
-    // const user = await this.userRepository.findUserByPostIdWithoutPassword(id);
     await this.postRepository.delete(postId);
   }
 
   async updatePostById(postId: number, data: PostReqDto): Promise<Post> {
     const { title, content, imgFile } = data;
-    const post = await this.postRepository.findOne({ where: { id: postId } });
+    const post = await this.postRepository.findPostById(postId);
     post.title = title;
     post.content = content;
     post.imgFile = imgFile;
@@ -63,15 +56,4 @@ export class PostsService {
   async blockPostById(postId: number): Promise<void> {
     await this.postRepository.update({ id: postId }, { blocked: true });
   }
-
-  //   async addComment(postId: number, comment: Comment): Promise<Comment> {
-  //     const post = await this.postRepository.findOne(postId);
-  //     comment.post = post;
-  //     const newComment = await this.commentRepository.save(comment);
-  //     return newComment;
-  //   }
-
-  //   async writeLike(postId: number): Promise<void> {
-  //     await this.postRepository.increment({ id: postId }, 'likeCount', 1);
-  //   }
 }

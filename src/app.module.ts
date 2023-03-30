@@ -7,6 +7,9 @@ import { Post } from './posts/post.entity';
 import { CommentsModule } from './comments/comments.module';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './common/logger/logger.middleware';
+import { PostLikesModule } from './postLikes/postLikes.module';
+import { Comment } from './comments/comment.entity';
+import { PostLikes } from './postLikes/postLikes.entity';
 
 @Module({
   imports: [
@@ -17,13 +20,14 @@ import { LoggerMiddleware } from './common/logger/logger.middleware';
       username: 'root',
       password: 'root',
       database: 'test',
-      entities: [User, Post],
+      entities: [User, Post, Comment, PostLikes],
       synchronize: true,
     }),
     UsersModule,
     PostsModule,
     CommentsModule,
     AuthModule,
+    PostLikesModule,
   ],
   controllers: [],
   providers: [],

@@ -17,5 +17,5 @@ export class Comment {
 
   @ManyToOne(() => User, (user) => user.posts)
   @JoinColumn({ name: 'user_id' })
-  userWhoLiked: User;
+  userWhoComment: User;
 }
