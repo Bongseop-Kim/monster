@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  Param,
+  Patch,
   Post,
   UseFilters,
   UseGuards,
@@ -40,5 +42,10 @@ export class UsersController {
   @Get()
   async getCurrentUser(@CurrentUser() user) {
     return user;
+  }
+
+  @Patch(':userId')
+  async blockPostById(@Param('userId') userId: number) {
+    await this.usersService.blockUserById(userId);
   }
 }

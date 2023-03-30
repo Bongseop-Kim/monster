@@ -25,4 +25,8 @@ export class UsersService {
     });
     return user;
   }
+
+  async blockUserById(userId: number): Promise<void> {
+    await this.userRepository.update({ id: userId }, { blocked: true });
+  }
 }
