@@ -10,6 +10,7 @@ import {
   UseFilters,
   UseInterceptors,
 } from '@nestjs/common';
+import { ApiOperation } from '@nestjs/swagger';
 import { HttpExceptionFilter } from 'src/common/exception/http-exception.filter';
 import { SuccessInterceptor } from 'src/common/interceptor/success.interceptor';
 import { PostReqDto } from './dto/post.request.dto';
@@ -21,12 +22,17 @@ import { PostsService } from './posts.service';
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
+  @ApiOperation({
+    summary: '게시글 작성하기',
+  })
   @Post()
   async createPost(@Body() data: PostReqDto) {
     const createdPost = await this.postsService.createPost(data);
     return createdPost;
   }
-
+  @ApiOperation({
+    summary: '게시글 조회하고 뷰 카운트 증가하기',
+  })
   @Get(':postId')
   async getPostById(@Param('postId') postId: number) {
     const post = await this.postsService.getPostById(postId);
@@ -35,16 +41,25 @@ export class PostsController {
     return post;
   }
 
+  @ApiOperation({
+    summary: '게시글 내용 수정하기',
+  })
   @Put(':postId')
   async updatePostById(@Param('postId') postId: number, data: PostReqDto) {
     await this.postsService.updatePostById(postId, data);
   }
 
+  @ApiOperation({
+    summary: '게시글 삭제하기',
+  })
   @Delete(':postId')
   async deletePostById(@Param('postId') postId: number) {
     await this.postsService.deletePostById(postId);
   }
 
+  @ApiOperation({
+    summary: '게시글 차단하기',
+  })
   @Patch('block/:postId')
   async blockPostById(@Param('postId') postId: number) {
     await this.postsService.blockPostById(postId);
