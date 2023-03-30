@@ -1,8 +1,8 @@
 import {
   Controller,
   Delete,
-  Get,
   Param,
+  Post,
   UseFilters,
   UseInterceptors,
 } from '@nestjs/common';
@@ -16,7 +16,7 @@ import { PostLikesService } from './postLikes.service';
 export class PostLikesController {
   constructor(private readonly postLikesService: PostLikesService) {}
 
-  @Get(':postId/:userId')
+  @Post(':postId/:userId')
   async createPostLikes(@Param('postId') postId, @Param('userId') userId) {
     await this.postLikesService.createPostLikes(postId, userId);
   }

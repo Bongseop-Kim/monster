@@ -7,11 +7,15 @@ export class PostLikes {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Post, (post) => post.likes)
+  @ManyToOne(() => Post, (post) => post.likes, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'post_id', referencedColumnName: 'id' })
   post: Post;
 
-  @ManyToOne(() => User, (user) => user.posts)
+  @ManyToOne(() => User, (user) => user.posts, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   liker: User;
 }

@@ -37,11 +37,13 @@ export class Post {
 
   @OneToMany(() => PostLikes, (postLikes) => postLikes.post, {
     nullable: true,
+    cascade: true,
   })
   likes: PostLikes[];
 
   @OneToMany(() => Comment, (comment) => comment.post, {
     nullable: true,
+    cascade: true,
   })
   commetns: Comment[];
 
