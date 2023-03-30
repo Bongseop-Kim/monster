@@ -25,6 +25,18 @@ export class PostLikesService {
     return newPostLike;
   }
 
+  async getCurrentUserLikes(postId: number, userId: number) {
+    const user = await this.userRepository.findUserByIdWithoutPassword(userId);
+    const post = await this.postRepository.findPostById(postId);
+    const postLike = await this.postLikeRepository.findOne({
+      where: {
+        liker: user,
+        post: post,
+      },
+    });
+    return postLike;
+  }
+
   async deletePostLikes(postLikesId: number) {
     await this.postLikeRepository.delete(postLikesId);
   }

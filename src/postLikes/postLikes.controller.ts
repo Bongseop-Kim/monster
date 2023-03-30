@@ -1,6 +1,7 @@
 import {
   Controller,
   Delete,
+  Get,
   Param,
   Post,
   UseFilters,
@@ -19,6 +20,19 @@ export class PostLikesController {
   @Post(':postId/:userId')
   async createPostLikes(@Param('postId') postId, @Param('userId') userId) {
     await this.postLikesService.createPostLikes(postId, userId);
+  }
+
+  //해당 휴저가 해당 게시판의 좋아요를 눌렀는지 확인하는 로직
+  @Get(':postId/:userId')
+  async getCurrentUserLikes(
+    @Param('postId') postId: number,
+    @Param('userId') userId,
+  ) {
+    const postLike = await this.postLikesService.getCurrentUserLikes(
+      postId,
+      userId,
+    );
+    return postLike;
   }
 
   @Delete(':postLikesId')
