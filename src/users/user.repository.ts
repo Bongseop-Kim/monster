@@ -14,6 +14,11 @@ export class UserRepository extends Repository<User> {
     );
   }
 
+  async save(data) {
+    const user = await this.userRepository.save(data);
+    return user;
+  }
+
   async findUserByPhoneNum(data: string) {
     const user = await this.userRepository.findOne({
       where: {
@@ -29,12 +34,6 @@ export class UserRepository extends Repository<User> {
         id: userId,
       },
     });
-    return user;
-  }
-
-  async createUser(data) {
-    const user = await this.userRepository.save(data);
-
     return user;
   }
 }

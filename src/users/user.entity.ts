@@ -22,7 +22,7 @@ export class User {
   @Column({ default: false })
   blocked: boolean;
 
-  @OneToMany(() => Post, (post) => post.author)
+  @OneToMany(() => Post, (post) => post.author, { nullable: true })
   posts: Post[];
 
   //패스 워드는 필요에 따라 readOnlyData를 만들어 준다.

@@ -22,7 +22,7 @@ export class Post {
   content: string;
 
   @Column({ nullable: true })
-  imgFiles: string;
+  imgFile: string;
 
   @Column({ default: 0 })
   viewCount: number;
@@ -31,7 +31,7 @@ export class Post {
   createdAt: Date;
 
   @ManyToOne(() => User, (user) => user.posts)
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   author: User;
 
   @ManyToMany(() => User)
